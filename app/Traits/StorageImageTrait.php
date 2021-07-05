@@ -34,4 +34,9 @@ trait StorageImageTrait
         ];
         return $data;
     }
+
+    public function luuAnh()
+    {
+        
+    }
 }
