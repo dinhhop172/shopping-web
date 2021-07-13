@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\ProductImage;
 use App\Models\ProductTag;
 use App\Models\Tag;
+use App\Traits\DeleteModelTrait;
 use App\Traits\StorageImageTrait;
 use Exception;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\DB;
 
 class AdminProductController extends Controller
 {
-    use StorageImageTrait;
+    use StorageImageTrait, DeleteModelTrait;
 
     private $category;
     private $product;
@@ -158,18 +159,6 @@ class AdminProductController extends Controller
     }
     public function destroy($id)
     {
-        try {
-            $this->product->findOrFail($id)->delete();
-            return response()->json([
-                'code' => 200,
-                'message' => 'Deleted successfully'
-            ], 200);
-        } catch (Exception $e) {
-            \Log::error('Messenger: ' . $e->getMessage() . '. Line: ' . $e->getLine());
-            return response()->json([
-                'code' => 500,
-                'message' => 'fail'
-            ], 500);
-        }
+        return $this->DeleteModel($id, $this->product);
     }
 }

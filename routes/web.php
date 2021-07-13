@@ -76,4 +76,24 @@ Route::prefix("admin")->group(function () {
             Route::get('/delete/{id}', 'AdminSliderController@destroy')->name('delete');
         });
     });
+    // ==================setting=================
+
+    Route::prefix("settings")->group(function () {
+        Route::name('settings.')->group(function () {
+            Route::get('/', 'AdminSettingController@index')->name('index');
+            Route::get('/create', 'AdminSettingController@create')->name('create');
+            Route::post('/store', 'AdminSettingController@store')->name('store');
+            Route::get('/edit/{id}', 'AdminSettingController@edit')->name('edit');
+            Route::post('/update/{id}', 'AdminSettingController@update')->name('update');
+            Route::get('/delete/{id}', 'AdminSettingController@destroy')->name('destroy');
+        });
+    });
+    Route::prefix("users")->group(function () {
+        Route::name('users.')->group(function () {
+            Route::get('/', 'AdminUserController@index')->name('index');
+            Route::get('/create', 'AdminUserController@create')->name('create');
+            Route::post('/store', 'AdminUserController@store')->name('store');
+            Route::get('/edit/{id}', 'AdminUserController@edit')->name('edit');
+        });
+    });
 });

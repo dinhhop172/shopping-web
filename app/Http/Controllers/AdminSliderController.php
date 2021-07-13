@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SliderAddRequest;
 use App\Models\Slider;
+use App\Traits\DeleteModelTrait;
 use App\Traits\StorageImageTrait;
 use Exception;
 use Illuminate\Http\Request;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 
 class AdminSliderController extends Controller
 {
-    use StorageImageTrait;
+    use StorageImageTrait, DeleteModelTrait;
     private $slider;
     public function __construct(Slider $slider)
     {
@@ -71,18 +72,6 @@ class AdminSliderController extends Controller
     }
     public function destroy($id)
     {
-        try {
-            $this->slider->findOrFail($id)->delete();
-            return response()->json([
-                'code' => 200,
-                'message' => 'deleted successfully'
-            ], 200);
-        } catch (Exception $e) {
-            \Log::error('Lỗi: ' . $e->getMessage() . '--Line: ' . $e->getLine());
-            return response()->json([
-                'code' => 500,
-                'message' => 'delete fail'
-            ], 500);
-        }
+        return $this->DeleteModel($id, $this->slider);
     }
 }

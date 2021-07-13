@@ -5,8 +5,8 @@
 <link rel="stylesheet" href="{{ asset('admins/slider/index/index.css') }}">
 @endsection
 @section("js")
-    <script src="{{ asset('vendor/sweetAlert2/sweetalert2@11.js') }}"></script>
-    <script src="{{ asset('admins/slider/index/index.js') }}"></script>
+<script src="{{ asset('vendor/sweetAlert2/sweetalert2@11.js') }}"></script>
+<script src="{{ asset('admins/main.js') }}"></script>
 @endsection
 @section("content")
 <!-- Content Wrapper. Contains page content -->
