@@ -25,4 +25,11 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
+    // accessor: dung de dinh dang(format) du lieu khi lay du lieu show ra view
+    public function getFullNameAttribute()
+    {
+        return "{$this->name} {$this->price}";
+    }
+    // muarator: dung de dinh dang(format) du lieu truoc khi lay luu vao DB
+
 }

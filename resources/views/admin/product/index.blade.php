@@ -2,11 +2,11 @@
 @section("title", "Product")
 
 @section("css")
-    <link rel="stylesheet" href="{{ asset('admins/product/index/list.css') }}">
+<link rel="stylesheet" href="{{ asset('admins/product/index/list.css') }}">
 @endsection
 @section("js")
-    <script src="{{ asset('vendor/sweetAlert2/sweetalert2@11.js') }}"></script>
-    <script src="{{ asset('admins/main.js') }}"></script>
+<script src="{{ asset('vendor/sweetAlert2/sweetalert2@11.js') }}"></script>
+<script src="{{ asset('admins/main.js') }}"></script>
 @endsection
 
 @section("content")

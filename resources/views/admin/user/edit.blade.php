@@ -22,7 +22,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-6">
-                    <form action="" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('users.update', ['id'=> $user->id]) }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
                             <label>Tên user</label>

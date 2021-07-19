@@ -13,7 +13,7 @@
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    @include("partials.content_header", ['name'=>'user', 'key'=>'List'])
+    @include("partials.content_header", ['name'=>'role', 'key'=>'List'])
     <!-- /.content-header -->
 
     <!-- Main content -->
@@ -22,7 +22,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="btn-group float-right">
-                        <a href="{{ route('users.create') }}" class="btn btn-success float-right m-2">Add</a>
+                        <a href="{{ route('roles.create') }}" class="btn btn-success float-right m-2">Add</a>
                     </div>
                 </div>
 
@@ -31,20 +31,20 @@
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
-                                <th scope="col">Tên</th>
-                                <th scope="col">Email</th>
+                                <th scope="col">Tên vai trò</th>
+                                <th scope="col">Mô tả vai trò</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($users as $user)
+                            @foreach ($roles as $role)
                             <tr>
-                                <th scope="row">{{ $user->id }}</th>
-                                <th scope="row">{{ $user->name }}</th>
-                                <td>{{ $user->email }}</td>
+                                <th scope="row">{{ $role->id }}</th>
+                                <td scope="row">{{ $role->name }}</td>
+                                <td>{{ $role->display_name }}</td>
                                 <td>
-                                    <a href="{{ route('users.edit', ['id' => $user->id]) }}" class="btn btn-default">Edit</a>
-                                    <a href="{{ route('users.destroy', ['id' => $user->id]) }}" data-url="{{ route('users.destroy', ['id' => $user->id]) }}" class="btn btn-danger action_delete">Delete</a>
+                                    <a href="{{ route('roles.edit', ['id' => $role->id]) }}" class="btn btn-default">Edit</a>
+                                    {{-- <a href="{{ route('roles.destroy', ['id' => $role->id]) }}" data-url="{{ route('users.destroy', ['id' => $user->id]) }}" class="btn btn-danger action_delete">Delete</a> --}}
                                 </td>
                             </tr>
                             @endforeach
@@ -52,7 +52,7 @@
                     </table>
                 </div>
                 <div class="col-md-12">
-                    {{ $users->links() }}
+                    {{ $roles->links() }}
                 </div>
             </div>
             <!-- /.row -->

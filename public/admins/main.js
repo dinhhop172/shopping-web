@@ -18,6 +18,7 @@ function actionDelete(event) {
                 success: function(data) {
                     console.log(data);
                     that.parent().parent().remove();
+                    // window.location.reload()
                     Swal.fire(
                         'Deleted!',
                         'Your file has been deleted.',

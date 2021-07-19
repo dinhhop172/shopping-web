@@ -94,6 +94,17 @@ Route::prefix("admin")->group(function () {
             Route::get('/create', 'AdminUserController@create')->name('create');
             Route::post('/store', 'AdminUserController@store')->name('store');
             Route::get('/edit/{id}', 'AdminUserController@edit')->name('edit');
+            Route::post('/update/{id}', 'AdminUserController@update')->name('update');
+            Route::get('/delete/{id}', 'AdminUserController@destroy')->name('destroy');
+        });
+    });
+    Route::prefix("roles")->group(function () {
+        Route::name('roles.')->group(function () {
+            Route::get('/', 'AdminRoleController@index')->name('index');
+            Route::get('/create', 'AdminRoleController@create')->name('create');
+            Route::post('/store', 'AdminRoleController@store')->name('store');
+            Route::get('/edit/{id}', 'AdminRoleController@edit')->name('edit');
+            Route::post('/update/{id}', 'AdminRoleController@update')->name('update');
         });
     });
 });
