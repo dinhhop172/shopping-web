@@ -105,6 +105,10 @@ Route::prefix("admin")->group(function () {
             Route::post('/store', 'AdminRoleController@store')->name('store');
             Route::get('/edit/{id}', 'AdminRoleController@edit')->name('edit');
             Route::post('/update/{id}', 'AdminRoleController@update')->name('update');
+            Route::get('/delete/{id}', 'AdminRoleController@destroy')->name('destroy');
         });
     });
 });
+
+Route::get('/upload', 'AdminRoleController@upload')->name('upload.get');
+Route::post('/upload/', 'AdminRoleController@uploadFile')->name('upload.post');

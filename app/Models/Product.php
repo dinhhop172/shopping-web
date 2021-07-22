@@ -31,5 +31,8 @@ class Product extends Model
         return "{$this->name} {$this->price}";
     }
     // muarator: dung de dinh dang(format) du lieu truoc khi lay luu vao DB
-
+    // public function setNameAttributes($value)
+    // {
+    //     return $this->attributes['name'] = $value;
+    // }
 }

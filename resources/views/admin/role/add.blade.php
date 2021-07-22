@@ -39,6 +39,12 @@
                     </div>
                     <div class="col-md-12">
                         <div class="row">
+                            <div class="col-md-12">
+                                <label for="">
+                                    <input type="checkbox" class="check_all">
+                                    Check all
+                                </label>
+                            </div>
                             @foreach ($permissionParent as $permissionParentItem)
                             <div class="card border-primary mb-3 col-md-12">
                                 <div class="card-header">
