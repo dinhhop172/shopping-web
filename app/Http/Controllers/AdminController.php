@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
-    public function loginAdmin()
+        public function loginAdmin()
     {
         if (auth()->check()) {
             return redirect('home');

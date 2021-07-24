@@ -29,12 +29,12 @@ Route::prefix("admin")->group(function () {
     //===============category=================
     Route::prefix("categories")->group(function () {
         Route::name('categories.')->group(function () {
-            Route::get('/', 'CategoryController@index')->name('index');
-            Route::get('create', 'CategoryController@create')->name('create');
+            Route::get('/', 'CategoryController@index')->name('index')->middleware('can:category-list');
+            Route::get('create', 'CategoryController@create')->name('create')->middleware('can:category-add');
             Route::post('store', 'CategoryController@store')->name('store');
-            Route::get('edit/{id}', 'CategoryController@edit')->name('edit');
+            Route::get('edit/{id}', 'CategoryController@edit')->name('edit')->middleware('can:category-edit');
             Route::post('update/{id}', 'CategoryController@update')->name('update');
-            Route::get('delete/{id}', 'CategoryController@destroy')->name('destroy');
+            Route::get('delete/{id}', 'CategoryController@destroy')->name('destroy')->middleware('can:category-delete');
         });
     });
     //===============category-end=========
@@ -42,12 +42,12 @@ Route::prefix("admin")->group(function () {
     //===============menu=================
     Route::prefix("menus")->group(function () {
         Route::name('menus.')->group(function () {
-            Route::get('/', 'MenuController@index')->name('index');
-            Route::get('create', 'MenuController@create')->name('create');
+            Route::get('/', 'MenuController@index')->name('index')->middleware('can:menu-list');
+            Route::get('create', 'MenuController@create')->name('create')->middleware('can:menu-add');
             Route::post('store', 'MenuController@store')->name('store');
-            Route::get('edit/{id}', 'MenuController@edit')->name('edit');
+            Route::get('edit/{id}', 'MenuController@edit')->name('edit')->middleware('can:menu-edit');
             Route::post('update/{id}', 'MenuController@update')->name('update');
-            Route::get('delete/{id}', 'MenuController@destroy')->name('destroy');
+            Route::get('delete/{id}', 'MenuController@destroy')->name('destroy')->middleware('can:menu-delete');
         });
     });
     // ====================end=menu=========
@@ -55,12 +55,12 @@ Route::prefix("admin")->group(function () {
     // ==================product============
     Route::prefix("products")->group(function () {
         Route::name('products.')->group(function () {
-            Route::get('/', 'AdminProductController@index')->name('index');
-            Route::get('/create', 'AdminProductController@create')->name('create');
+            Route::get('/', 'AdminProductController@index')->name('index')->middleware('can:product-list');
+            Route::get('/create', 'AdminProductController@create')->name('create')->middleware('can:product-add');
             Route::post('/store', 'AdminProductController@store')->name('store');
-            Route::get('/edit/{id}', 'AdminProductController@edit')->name('edit');
+            Route::get('/edit/{id}', 'AdminProductController@edit')->name('edit')->middleware('can:product-edit,id');
             Route::post('/update/{id}', 'AdminProductController@update')->name('update');
-            Route::get('/delete/{id}', 'AdminProductController@destroy')->name('delete');
+            Route::get('/delete/{id}', 'AdminProductController@destroy')->name('delete')->middleware('can:product-delete');
         });
     });
     // ====================end=product=========
@@ -106,6 +106,12 @@ Route::prefix("admin")->group(function () {
             Route::get('/edit/{id}', 'AdminRoleController@edit')->name('edit');
             Route::post('/update/{id}', 'AdminRoleController@update')->name('update');
             Route::get('/delete/{id}', 'AdminRoleController@destroy')->name('destroy');
+        });
+    });
+    Route::prefix("permissions")->group(function () {
+        Route::name('permissions.')->group(function () {
+            Route::get('/create', 'AdminPermissionController@createPermission')->name('create');
+            Route::post('/store', 'AdminPermissionController@store')->name('store');
         });
     });
 });

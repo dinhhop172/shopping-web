@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Permission;
 use App\Models\Role;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Validator;
 
@@ -58,10 +59,21 @@ class AdminRoleController extends Controller
         return redirect()->route('roles.index');
     }
 
-    public function destroy()
+    public function destroy($id)
     {
-        
+        try {
+            \DB::beginTransaction();
+            $role = $this->role->findOrFail($id);
+            $role->permissions()->detach();
+            $this->role->findOrFail($id)->delete();
+            \DB::commit();
+            return redirect()->route('roles.index');
+        } catch (Exception $e) {
+            \DB::rollback();
+            Log::error("Message: " . $e->getMessage() . 'on Line: ' . $e->getLine());
+        }
     }
+
 
     public function upload()
     {

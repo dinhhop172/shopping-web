@@ -88,7 +88,14 @@
                     <a href="{{ route('roles.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
                         <p>
-                            Danh sách vai trò
+                            Danh sách vai trò (Roles)
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('permissions.create') }}" class="nav-link">
+                        <p>
+                            Tạo Dữ liệu bảng Permission
                         </p>
                     </a>
                 </li>
