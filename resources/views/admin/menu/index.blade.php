@@ -12,7 +12,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    @can('menu-add')
                     <a href="{{ route('menus.create') }}" class="btn btn-success float-right m-2">Add</a>
+                    @endcan
                 </div>
                 <div class="col-md-12">
                     <table class="table">
@@ -29,8 +31,12 @@
                                 <th scope="row">{{ $menu->id }}</th>
                                 <td>{{ $menu->name }}</td>
                                 <td>
+                                    @can('menu-edit')
                                     <a href="{{ route('menus.edit', ['id' => $menu->id]) }}" class="btn btn-default">Edit</a>
+                                    @endcan
+                                    @can('menu-delete')
                                     <a href="{{ route('menus.destroy', ['id' => $menu->id]) }}" class="btn btn-danger">Delete</a>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach

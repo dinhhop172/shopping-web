@@ -30,7 +30,7 @@ class ProductPolicy
      */
     public function view(User $user)
     {
-        return $user->checkPermissionRole(config('permissions.access.list-menu'));
+        return $user->checkPermissionRole(config('permissions.access.list-product'));
     }
 
     /**
@@ -41,7 +41,7 @@ class ProductPolicy
      */
     public function create(User $user)
     {
-        return $user->checkPermissionRole(config('permissions.access.add-menu'));
+        return $user->checkPermissionRole(config('permissions.access.add-product'));
     }
 
     /**
@@ -53,7 +53,7 @@ class ProductPolicy
      */
     public function update(User $user, $id)
     {
-        // return $user->checkPermissionRole(config('permissions.access.edit-menu'));
+        // return $user->checkPermissionRole(config('permissions.access.edit-product'));
         $product = Product::findOrFail($id);
         if ($user->checkPermissionRole(config('permissions.access.edit-product')) && $user->id === $product->user_id) {
             return true;
@@ -70,7 +70,7 @@ class ProductPolicy
      */
     public function delete(User $user)
     {
-        return $user->checkPermissionRole(config('permissions.access.delete-menu'));
+        return $user->checkPermissionRole(config('permissions.access.delete-product'));
     }
 
     /**
