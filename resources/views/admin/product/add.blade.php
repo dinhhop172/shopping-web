@@ -57,7 +57,9 @@
                         <div class="form-group">
                             <label>Nhập tags cho sản phẩm</label>
                             <select name="tags[]" class="form-control tags_select_choose" multiple="multiple">
-
+                                @foreach ($tags as $tagItem)
+                                <option value="{{ $tagItem->id }}">{{ $tagItem->name }}</option>
+                                @endforeach
                             </select>
                         </div>
 

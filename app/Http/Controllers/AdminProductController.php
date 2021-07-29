@@ -47,7 +47,8 @@ class AdminProductController extends Controller
     public function create()
     {
         $optionSelect = $this->getCategory($parent_id = '');
-        return view('admin.product.add', compact('optionSelect'));
+        $tags = $this->tag->get();
+        return view('admin.product.add', compact('optionSelect', 'tags'));
     }
 
     public function getCategory($parent_id)

@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/admin', 'AdminController@loginAdmin');
 Route::post('/admin', 'AdminController@postLoginAdmin');
-Route::get('/', 'Frontend\HomeController@index');
+Route::get('/', 'Frontend\HomeController@index')->name('front.index');
+Route::get('/category/{slug}-{id}', 'Frontend\CatgoryController@index')->name('front.category');
 Route::get('/home', function () {
     return view('/home');
 });

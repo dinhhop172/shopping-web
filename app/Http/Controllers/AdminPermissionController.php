@@ -27,6 +27,7 @@ class AdminPermissionController extends Controller
         //     'display_name' => $request->module_parent,
         //     'parent_id' => 0,
         // ]);
+        dd($request->route()->getName());
         Permission::create([
             'name' => $request->name,
             'display_name' => $request->display_name,
