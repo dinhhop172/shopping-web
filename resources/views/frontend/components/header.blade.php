@@ -63,11 +63,25 @@
                 <div class="col-md-8 clearfix">
                     <div class="shop-menu clearfix pull-right">
                         <ul class="nav navbar-nav">
-                            <li><a href=""><i class="fa fa-user"></i> Account</a></li>
+                            @if (auth()->guard('customer')->check())
+                            <li><a href="#" type="button" class="dropdown-toggle" id="about-us" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> {{ auth()->guard('customer')->user()->name }} <span class="caret"></span></a>
+                                <ul class="dropdown-menu" aria-labelledby="about-us">
+                                    <li><a href="#">Profile</a></li>
+                                    <li><a href="{{ route('front.logout-cus') }}">Logout</a></li>
+                                </ul>
+                            </li>
+
+                            @else
+                            <li><a href="{{ route('front.login') }}"><i class="fa fa-user"></i> Account</a></li>
+                            @endif
                             <li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
                             <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                             <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                            <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
+                            {{-- @if (!auth()->guard('customer')->check()) --}}
+                            @guest('customer')
+                            <li><a href="{{route('front.login')}}"><i class="fa fa-lock"></i> Login</a></li>
+                            {{-- @endif --}}
+                            @endguest
                         </ul>
                     </div>
                 </div>

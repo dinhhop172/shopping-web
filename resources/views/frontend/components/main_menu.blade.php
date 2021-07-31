@@ -1,5 +1,5 @@
 <div class="mainmenu pull-left">
-    <ul class="nav navbar-nav collapse navbar-collapse">
+    <ul class="nav navbar-nav collapse navbar-collapse" id="checkActive">
         <li><a href="{{ route('front.index') }}" class="active">Home</a></li>
         @foreach ($categoryLimit as $catgoryItem)
         <li class="dropdown">
@@ -11,7 +11,6 @@
             @include('frontend.components.child_menu', ['categoryParent'=>$catgoryItem])
         </li>
         @endforeach
-        <li><a href="404.html">404</a></li>
-        <li><a href="contact-us.html">Contact</a></li>
+        <li><a href="{{ route('front.contact') }}">Contact</a></li>
     </ul>
 </div>

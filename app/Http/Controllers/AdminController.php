@@ -8,22 +8,34 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
-        public function loginAdmin()
+    // public function loginAdmin()
+    // {
+    //     if (auth()->check()) {
+    //         return redirect('home');
+    //     }
+    //     return view('login');
+    // }
+
+    // public function postLoginAdmin(Request $request)
+    // {
+    //     $remember = $request->has('remember_me') ? true : false;
+    //     if (Auth::attempt([
+    //         'email' => $request->email,
+    //         'password' => ($request->password)
+    //     ], $remember)) {
+    //         return redirect('home');
+    //     }
+    // }
+    public function logout($item)
     {
-        if (auth()->check()) {
-            return redirect('home');
-        }
-        return view('login');
+        Auth::logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+        return redirect($item);
     }
 
-    public function postLoginAdmin(Request $request)
+    public function dasboard()
     {
-        $remember = $request->has('remember_me') ? true : false;
-        if (Auth::attempt([
-            'email' => $request->email,
-            'password' => ($request->password)
-        ], $remember)) {
-            return redirect('home');
-        }
+        return view('admin.index');
     }
 }

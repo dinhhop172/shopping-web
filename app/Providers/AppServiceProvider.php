@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
+use Illuminate\Database\Schema\Builder;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Builder::defaultStringLength(191);
+        view()->composer('*', function ($view) {
+            $categoryLimit = Category::where('parent_id', 0)->take(3)->get();
+            $view->with('categoryLimit', $categoryLimit);
+        });
     }
 }

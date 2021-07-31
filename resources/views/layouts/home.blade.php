@@ -23,6 +23,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ asset('eshopper/images/ico/apple-touch-icon-114-precomposed.png') }}">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ asset('eshopper/images/ico/apple-touch-icon-72-precomposed.png') }}">
     <link rel="apple-touch-icon-precomposed" href="{{ asset('eshopper/images/ico/apple-touch-icon-57-precomposed.png') }}">
+    @yield('css')
 </head>
 
 <body>
@@ -36,6 +37,8 @@
     <script src="{{ asset('eshopper/js/price-range.js') }}"></script>
     <script src="{{ asset('eshopper/js/jquery.prettyPhoto.js') }}"></script>
     <script src="{{ asset('eshopper/js/main.js') }}"></script>
+    <script src="{{asset('frontend/app.js')}}"></script>
+    @yield('js')
 </body>
 
 </html>

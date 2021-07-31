@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,20 +15,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/admin', 'AdminController@loginAdmin');
-Route::post('/admin', 'AdminController@postLoginAdmin');
-Route::get('/', 'Frontend\HomeController@index')->name('front.index');
-Route::get('/category/{slug}-{id}', 'Frontend\CatgoryController@index')->name('front.category');
-Route::get('/home', function () {
-    return view('/home');
+Route::name("front.")->group(function () {
+    Route::get('/', 'Frontend\HomeController@index')->name('index');
+    Route::post('/register-customer', 'Frontend\HomeController@register')->name('register');
+    Route::get('/category/{slug}-{id}', 'Frontend\CatgoryController@index')->name('category');
+    Route::get('/contact', 'Frontend\CatgoryController@contact')->name('contact');
+    Route::get('/sign-in', 'Frontend\HomeController@login')->name('login')->middleware('customerCheck');
+    Route::post('/sign-in', 'Frontend\HomeController@postLogin')->name('post.login');
+    Route::get('logout-{item}', 'AdminController@logout')->name('logout');
+    Route::get('logout', 'Frontend\HomeController@logout')->name('logout-cus');
 });
-
 // Route::prefix("categories")->name("categories.")->group(function () {
 //     Route::get('create', 'CategoryController@create')->name('create');
 // });
 
-Route::prefix("admin")->group(function () {
-    //===============category=================
+Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
+    Route::get('/', 'AdminController@dasboard')->name('admin.index');
     Route::prefix("categories")->group(function () {
         Route::name('categories.')->group(function () {
             Route::get('/', 'CategoryController@index')->name('index')->middleware('can:category-list');
@@ -37,9 +41,7 @@ Route::prefix("admin")->group(function () {
             Route::get('delete/{id}', 'CategoryController@destroy')->name('destroy')->middleware('can:category-delete');
         });
     });
-    //===============category-end=========
 
-    //===============menu=================
     Route::prefix("menus")->group(function () {
         Route::name('menus.')->group(function () {
             Route::get('/', 'MenuController@index')->name('index')->middleware('can:menu-list');
@@ -50,9 +52,7 @@ Route::prefix("admin")->group(function () {
             Route::get('delete/{id}', 'MenuController@destroy')->name('destroy')->middleware('can:menu-delete');
         });
     });
-    // ====================end=menu=========
 
-    // ==================product============
     Route::prefix("products")->group(function () {
         Route::name('products.')->group(function () {
             Route::get('/', 'AdminProductController@index')->name('index')->middleware('can:product-list');
@@ -63,9 +63,7 @@ Route::prefix("admin")->group(function () {
             Route::get('/delete/{id}', 'AdminProductController@destroy')->name('delete')->middleware('can:product-delete');
         });
     });
-    // ====================end=product=========
 
-    // ==================slider============
     Route::prefix("sliders")->group(function () {
         Route::name('sliders.')->group(function () {
             Route::get('/', 'AdminSliderController@index')->name('index');
@@ -76,7 +74,6 @@ Route::prefix("admin")->group(function () {
             Route::get('/delete/{id}', 'AdminSliderController@destroy')->name('delete');
         });
     });
-    // ==================setting=================
 
     Route::prefix("settings")->group(function () {
         Route::name('settings.')->group(function () {
@@ -118,3 +115,7 @@ Route::prefix("admin")->group(function () {
 
 Route::get('/upload', 'AdminRoleController@upload')->name('upload.get');
 Route::post('/upload/', 'AdminRoleController@uploadFile')->name('upload.post');
+
+Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');

@@ -17,9 +17,12 @@ class CatgoryController extends Controller
     }
     public function index($slug, $categoryId)
     {
-        $categoryLimit = $this->category->where('parent_id', 0)->take(3)->get();
         $categoryParent = $this->category->where('parent_id', 0)->get();
         $products = $this->product->where('category_id', $categoryId)->paginate(12);
-        return view('frontend.product.category.list', compact('categoryLimit', 'products', 'categoryParent'));
+        return view('frontend.product.category.list', compact('products', 'categoryParent'));
+    }
+    public function contact()
+    {
+        return view('frontend.components.contact');
     }
 }
