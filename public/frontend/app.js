@@ -5,7 +5,12 @@ $(function() {
     });
     $('.owl-prev')[0].classList.add('recommended-item-control');
     $('.owl-next')[0].classList.add('recommended-item-control');
+    $tabs = $('.nav.nav-tabs')[0];
+    $('.active_product')[0].classList.add('active');
+    $('.active_product')[0].classList.add('in');
 
+    // console.log($active_product);
+    $tabs.firstElementChild.classList.add('active');
 });
 $('.owl-carousel').owlCarousel({
     margin: 10,
@@ -22,7 +27,7 @@ $('.owl-carousel').owlCarousel({
             loop: true
         },
         600: {
-            items: 3,
+            items: 2,
             nav: true,
             loop: true
         },
