@@ -26,7 +26,6 @@
                         <ul>
                             @foreach ($categoryItem->categoryChild as $categoryItemChild)
                             <li><a href="{{ route('front.category', ['slug' => $categoryItemChild->slug, 'id'=>$categoryItemChild->id]) }}">{{ $categoryItemChild->name }} </a></li>
-
                             @endforeach
                         </ul>
                     </div>

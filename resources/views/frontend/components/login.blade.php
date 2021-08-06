@@ -47,6 +47,14 @@
                         @error('re-password')
                         <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
+                        <input type="text" name="phone" placeholder="Phone" class="@error('phone') is-invalid @enderror" value="{{ old('phone')  }}" />
+                        @error('phone')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                        <input type="text" name="address" placeholder="Adress" class="@error('address') is-invalid @enderror" value="{{ old('address')  }}" />
+                        @error('address')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                         <button type="submit" class="btn btn-default">Signup</button>
                     </form>
                 </div>

@@ -26,7 +26,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Builder::defaultStringLength(191);
-        view()->composer('*', function ($view) {
+        view()->composer('frontend.components.main_menu', function ($view) {
             $categoryLimit = Category::where('parent_id', 0)->take(3)->get();
             $view->with('categoryLimit', $categoryLimit);
         });

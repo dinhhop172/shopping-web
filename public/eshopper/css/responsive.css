@@ -35,16 +35,16 @@
 /* sm */
 
 @media (min-width: 768px) and (max-width: 991px) {
-    .shop-menu{
+    .shop-menu {
         display: block;
         width: 100%;
         text-align: center;
     }
-    .shop-menu ul{
+    .shop-menu .navbar-custom-menu {
         display: inline-block;
         float: none;
     }
-    .shop-menu ul li a {
+    .shop-menu .navbar-custom-menu li a {
         padding-left: 0;
     }
     #slider-carousel .item {
@@ -115,27 +115,38 @@
 /* xs */
 
 @media (max-width: 767px) {
-    #cart_items .cart_info table{
+    .navbar-nav .open .dropdown-menu {
+        position: absolute;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+    }
+    .dropdown-menu>li {
+        text-align: left;
+    }
+    .navbar-nav .open .dropdown-menu>li>a,
+    .navbar-nav .open .dropdown-menu .dropdown-header {
+        padding: 0px
+    }
+    #cart_items .cart_info table {
         min-width: 600px;
     }
-    #cart_items .cart_info .cart_description h4 a{
+    #cart_items .cart_info .cart_description h4 a {
         font-style: 15px;
     }
-    #cart_items .cart_info .cart_description p{
+    #cart_items .cart_info .cart_description p {
         font-size: 12px;
     }
-    .mainmenu ul li:first-child{
+    .mainmenu ul li:first-child {
         padding-left: 15px;
     }
-    #form{
+    #form {
         margin-top: 10px;
     }
-    .shop-menu{
+    .shop-menu {
         display: block;
         width: 100%;
         text-align: center;
     }
-    .shop-menu ul{
+    .shop-menu .navbar-custom-menu {
         display: inline-block;
         float: none;
     }
@@ -264,24 +275,29 @@
 /* XS Portrait */
 
 @media (max-width: 480px) {
-    .bill-to{
+    .bill-to {
         margin-top: 10px;
     }
-    .form-two, .form-one{
+    .dropdown-menu>li {
+        margin-left: 0px;
+    }
+    .form-two,
+    .form-one {
         width: 100%;
         margin-left: 0;
     }
-    .header-middle .dropdown-menu{
+    .header-middle .dropdown-menu {
         text-align: left;
     }
-    .header-middle .dropdown-menu{
-        min-width: 0;;
+    .header-middle .dropdown-menu {
+        min-width: 0;
+        ;
     }
-    .header-middle .logo + div{
+    .header-middle .logo+div {
         text-align: center;
         display: block;
     }
-    .header-middle .btn-group>.btn-group{
+    .header-middle .btn-group>.btn-group {
         float: none;
     }
     .contactinfo {
@@ -319,7 +335,7 @@
         text-align: center;
         width: 100%;
     }
-    .shop-menu ul li {
+    .shop-menu .navbar-custom-menu li {
         padding: 0 5px;
     }
     .header-middle .col-sm-4 {

@@ -18,12 +18,30 @@ use Illuminate\Support\Facades\Route;
 Route::name("front.")->group(function () {
     Route::get('/', 'Frontend\HomeController@index')->name('index');
     Route::post('/register-customer', 'Frontend\HomeController@register')->name('register');
-    Route::get('/category/{slug}-{id}', 'Frontend\CatgoryController@index')->name('category');
-    Route::get('/contact', 'Frontend\CatgoryController@contact')->name('contact');
-    Route::get('/sign-in', 'Frontend\HomeController@login')->name('login')->middleware('customerCheck');
+    Route::get('/category/{slug}-{id}.html', 'Frontend\CatgoryController@index')->name('category');
+    Route::get('/contact.html', 'Frontend\CatgoryController@contact')->name('contact');
+    Route::get('/sign-in.html', 'Frontend\HomeController@login')->name('login')->middleware('customerCheck');
     Route::post('/sign-in', 'Frontend\HomeController@postLogin')->name('post.login');
+
     Route::get('logout-{item}', 'AdminController@logout')->name('logout');
     Route::get('logout', 'Frontend\HomeController@logout')->name('logout-cus');
+
+    Route::get('/search', 'Frontend\HomeController@search')->name('search');
+    Route::get('/{slug}/{id}', 'Frontend\HomeController@productDetail')->name('productdetail');
+});
+Route::get('/test', 'Frontend\HomeController@test');
+
+Route::name("customer.")->middleware('check.login.customer')->prefix('user/account')->group(function () {
+    Route::get('/profile.html', 'Frontend\HomeController@profile')->name('profile');
+    Route::post('/profile', 'Frontend\HomeController@submitProfile')->name('profilesubmit');
+    Route::get('/my-order.html', 'Frontend\HomeController@myOrder')->name('order');
+    Route::get('/verify-password', 'Frontend\HomeController@verifyPassword')->name('verifypassword');
+    Route::get('/change-email', 'Frontend\HomeController@changeEmail')->name('changemail');
+    Route::post('/change-email', 'Frontend\HomeController@changeEmailUpdate')->name('changemail.update');
+    Route::get('/change-phone', 'Frontend\HomeController@changePhone')->name('changephone');
+    Route::post('/change-phone', 'Frontend\HomeController@changePhoneUpdate')->name('changephone.update');
+    Route::get('/change-pass', 'Frontend\HomeController@changePass')->name('changepass');
+    Route::post('/change-pass', 'Frontend\HomeController@changePassUpdate')->name('changepass.update');
 });
 // Route::prefix("categories")->name("categories.")->group(function () {
 //     Route::get('create', 'CategoryController@create')->name('create');

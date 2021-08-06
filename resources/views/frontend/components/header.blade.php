@@ -62,15 +62,14 @@
                 </div>
                 <div class="col-md-8 clearfix">
                     <div class="shop-menu clearfix pull-right">
-                        <ul class="nav navbar-nav">
+                        <ul class="nav navbar-nav navbar-custom-menu">
                             @if (auth()->guard('customer')->check())
                             <li><a href="#" type="button" class="dropdown-toggle" id="about-us" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> {{ auth()->guard('customer')->user()->name }} <span class="caret"></span></a>
                                 <ul class="dropdown-menu" aria-labelledby="about-us">
-                                    <li><a href="#">Profile</a></li>
+                                    <li><a href="{{route('customer.profile')}}">Profile</a></li>
                                     <li><a href="{{ route('front.logout-cus') }}">Logout</a></li>
                                 </ul>
                             </li>
-
                             @else
                             <li><a href="{{ route('front.login') }}"><i class="fa fa-user"></i> Account</a></li>
                             @endif
@@ -106,9 +105,11 @@
                     @include('frontend.components.main_menu')
                 </div>
                 <div class="col-sm-3">
-                    <div class="search_box pull-right">
-                        <input type="text" placeholder="Search" />
-                    </div>
+                    <form action="{{ route('front.search') }}" method="get">
+                        <div class="search_box pull-right">
+                            <input type="text" placeholder="Search" name="search" />
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

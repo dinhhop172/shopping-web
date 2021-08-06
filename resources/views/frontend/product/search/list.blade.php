@@ -1,12 +1,13 @@
 @extends('layouts.listproduct')
-@section('title', 'Danh muc')
+@section('title', 'Search')
 @section('listproduct')
 
 <div class="col-sm-9 padding-right">
     <div class="features_items">
         <!--features_items-->
         <h2 class="title text-center">Features Items</h2>
-        @foreach ($products as $productItem)
+
+        @forelse ($searchProduct as $productItem)
 
         <div class="col-sm-4">
             <div class="product-image-wrapper">
@@ -28,14 +29,17 @@
                 <div class="choose">
                     <ul class="nav nav-pills nav-justified">
                         <li><a href=""><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-                        <li><a href="{{ route('front.productdetail', ['slug'=>$productItem->slug, 'id' => $productItem->id]) }}"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+                        <li><a href="{{ route('front.productdetail', ['slug'=>$productItem->slug, 'id'=>$productItem->id]) }}"><i class="fa fa-plus-square"></i>Add to compare</a></li>
                     </ul>
                 </div>
             </div>
         </div>
-        @endforeach
-        {{ $products->links() }}
-
+        @empty
+        <div class="mt-5">
+            <h1 class="text-center">Not Found</h1>
+        </div>
+        @endforelse
+        {{ $searchProduct->appends(request()->only('search'))->links() }}
     </div>
     <!--features_items-->
 </div>

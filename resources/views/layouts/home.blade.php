@@ -8,12 +8,15 @@
     <meta name="author" content="">
     <title>@yield('title')</title>
     <link href="{{ asset('eshopper/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('vendor/owlcarousel/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/owlcarousel/owl.theme.default.min.css') }}">
     <link href="{{ asset('eshopper/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('eshopper/css/prettyPhoto.css') }}" rel="stylesheet">
     <link href="{{ asset('eshopper/css/price-range.css') }}" rel="stylesheet">
     <link href="{{ asset('eshopper/css/animate.css') }}" rel="stylesheet">
     <link href="{{ asset('eshopper/css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('eshopper/css/responsive.css') }}" rel="stylesheet">
+    <link href="{{ asset('frontend/app.css') }}" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="{{ asset('eshopper/js/html5shiv.js') }}"></script>
     <script src="{{ asset('eshopper/js/respond.min.js') }}"></script>
@@ -32,12 +35,15 @@
     @include('frontend.components.footer')
 
     <script src="{{ asset('eshopper/js/jquery.js') }}"></script>
+    <script src="{{ asset('vendor/owlcarousel/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('eshopper/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('eshopper/js/jquery.scrollUp.min.js') }}"></script>
     <script src="{{ asset('eshopper/js/price-range.js') }}"></script>
     <script src="{{ asset('eshopper/js/jquery.prettyPhoto.js') }}"></script>
     <script src="{{ asset('eshopper/js/main.js') }}"></script>
+    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
     <script src="{{asset('frontend/app.js')}}"></script>
+    @include('sweetalert::alert')
     @yield('js')
 </body>
 

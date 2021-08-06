@@ -11,9 +11,12 @@ class Customer extends Authenticatable
     use Notifiable;
     protected $table = 'customers';
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'address', 'phone'
     ];
     protected $hidden = [
         'password', 'remember_token',
+    ];
+    protected $casts = [
+        'email_verified_at' => 'datetime',
     ];
 }

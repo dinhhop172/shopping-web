@@ -67,6 +67,7 @@ class AdminProductController extends Controller
                 'name' => $request->name,
                 'price' => $request->price,
                 'content' => $request->content,
+                'slug' => \Str::slug($request->name),
                 'user_id' => auth()->id(),
                 'category_id' => $request->category_id,
             ];
@@ -120,6 +121,7 @@ class AdminProductController extends Controller
                 'name' => $request->name,
                 'price' => $request->price,
                 'content' => $request->content,
+                'slug' => \Str::slug($request->name),
                 'user_id' => auth()->id(),
                 'category_id' => $request->category_id,
             ];

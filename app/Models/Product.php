@@ -35,4 +35,13 @@ class Product extends Model
     // {
     //     return $this->attributes['name'] = $value;
     // }
+
+    public function scopeSearch($query)
+    {
+        if (request()->search) {
+            $search = request()->search;
+            $query->where('name', 'LIKE', "%" . $search . "%");
+        }
+        return $query;
+    }
 }
