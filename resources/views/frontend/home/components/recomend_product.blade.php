@@ -7,7 +7,9 @@
             <div class="product-image-wrapper">
                 <div class="single-products">
                     <div class="productinfo text-center">
-                        <img src="{{ $valueRecommend->feature_image_path }}" alt="" />
+                        <a href="{{ route('front.productdetail', ['slug'=>$valueRecommend->slug, 'id' => $valueRecommend->id]) }}">
+                            <img src="{{ $valueRecommend->feature_image_path }}" alt="" />
+                        </a>
                         <h2>{{ number_format($valueRecommend->price,0,',','.') }} VND</h2>
                         <p>{{ $valueRecommend->name }}</p>
                         <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>

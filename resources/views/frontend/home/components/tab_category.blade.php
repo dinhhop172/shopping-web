@@ -23,7 +23,9 @@
                 <div class="product-image-wrapper">
                     <div class="single-products">
                         <div class="productinfo text-center">
-                            <img src="{{ $productCate->feature_image_path }}" alt="" />
+                            <a href="{{ route('front.productdetail', ['slug'=>$productCate->slug, 'id' => $productCate->id]) }}">
+                                <img src="{{ $productCate->feature_image_path }}" alt="" />
+                            </a>
                             <h2>{{ number_format($productCate->price,0,',','.') }} VND</h2>
                             <p>{{ $productCate->name }}</p>
                             <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
@@ -41,7 +43,9 @@
                 <div class="product-image-wrapper">
                     <div class="single-products">
                         <div class="productinfo text-center">
-                            <img src="{{ $productCate->feature_image_path }}" alt="" />
+                            <a href="{{ route('front.productdetail', ['slug'=>$productCate->slug, 'id' => $productCate->id]) }}">
+                                <img src="{{ $productCate->feature_image_path }}" alt="" />
+                            </a>
                             <h2>{{ number_format($productCate->price,0,',','.') }} VND</h2>
                             <p>{{ $productCate->name }}</p>
                             <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>

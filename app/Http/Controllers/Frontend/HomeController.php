@@ -9,6 +9,7 @@ use App\Models\Customer;
 use App\Models\Product;
 use App\Models\Setting;
 use App\Models\Slider;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -203,13 +204,40 @@ class HomeController extends Controller
     }
     public function productDetail($slug, $id)
     {
-        $data = $this->product->find($id);
-        $categoryParent = $this->category->where('parent_id', 0)->get();
-        $productRecommend = $this->product->latest('views_count', 'DESC')->take(12)->get();
-        return view('frontend.product.product-detail', compact('data', 'categoryParent', 'productRecommend'));
+        try {
+            \DB::beginTransaction();
+            $data = $this->product->find($id);
+            // dd($data);
+            $categoryParent = $this->category->where('parent_id', 0)->get();
+            $productRecommend = $this->product->latest('views_count', 'DESC')->take(12)->get();
+            $view_count = $this->product->select('views_count')->find($id);
+            $this->product->where('id', $id)->update([
+                'views_count' => $view_count->views_count += 0.01,
+            ]);
+            \DB::commit();
+            return view('frontend.product.product-detail', compact('data', 'categoryParent', 'productRecommend'));
+        } catch (Exception $e) {
+            \DB::rollback();
+            \Log::error("Message: " . $e->getMessage() . " on Line: " . $e->getLine());
+        }
     }
     public function test()
     {
         return view('frontend.test');
+    }
+    public function viewCount($id)
+    {
+        try {
+            \DB::beginTransaction();
+            $view_count = $this->product->select('views_count')->find($id);
+            $this->product->where('id', $id)->update([
+                'views_count' => $view_count->views_count += 1,
+            ]);
+            \DB::commit();
+            return response()->json(['success' => 202, 'status' => 'success']);
+        } catch (Exception $e) {
+            \DB::rollback();
+            \Log::error("Message: " . $e->getMessage() . " on Line: " . $e->getLine());
+        }
     }
 }

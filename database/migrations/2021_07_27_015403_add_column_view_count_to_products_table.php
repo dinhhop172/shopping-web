@@ -14,7 +14,7 @@ class AddColumnViewCountToProductsTable extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->integer('views_count')->default(0);
+            $table->float('views_count')->default(0);
         });
     }
 

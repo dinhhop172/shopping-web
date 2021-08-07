@@ -28,7 +28,7 @@
                 <div class="choose">
                     <ul class="nav nav-pills nav-justified">
                         <li><a href=""><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-                        <li><a href="{{ route('front.productdetail', ['slug'=>$productItem->slug, 'id' => $productItem->id]) }}"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+                        <li><a href="{{ route('front.productdetail', ['slug'=>$productItem->slug, 'id' => $productItem->id]) }}"><i class="fa fa-plus-square"></i>Detail</a></li>
                     </ul>
                 </div>
             </div>

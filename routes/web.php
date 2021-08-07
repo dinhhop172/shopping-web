@@ -29,10 +29,11 @@ Route::name("front.")->group(function () {
     Route::get('logout-{item}', 'AdminController@logout')->name('logout');
     Route::get('logout', 'Frontend\HomeController@logout')->name('logout-cus');
 
-    Route::get('/search', 'Frontend\HomeController@search')->name('search');
-    Route::get('/{slug}/{id}', 'Frontend\HomeController@productDetail')->name('productdetail');
+    Route::get('/search.html', 'Frontend\HomeController@search')->name('search');
+    Route::get('/{slug}/{id}.html', 'Frontend\HomeController@productDetail')->name('productdetail');
 });
 Route::get('/test', 'Frontend\HomeController@test');
+Route::get('/view/{id}', 'Frontend\HomeController@viewCount');
 
 Route::name("customer.")->middleware('check.login.customer')->prefix('user/account')->group(function () {
     Route::get('/profile.html', 'Frontend\HomeController@profile')->name('profile');
