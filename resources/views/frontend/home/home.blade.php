@@ -26,3 +26,10 @@
 </section>
 
 @endsection
+@section('js')
+<script>
+    $('.active_product')[0].classList.add('active', 'in');
+    $tabs = $('.nav.nav-tabs')[0];
+    $tabs.firstElementChild.classList.add('active');
+</script>
+@endsection

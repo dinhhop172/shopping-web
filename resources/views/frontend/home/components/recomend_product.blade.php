@@ -1,7 +1,7 @@
 <div class="recommended_items">
     <!--recommended_items-->
     <h2 class="title text-center">recommended items</h2>
-    <div class="owl-carousel owl-theme" id="recommended-item-carousel">
+    <div class="owl-carousel owl-carousel1 owl-theme" id="recommended-item-carousel">
         @foreach ($productRecommend as $valueRecommend)
         <div class="col-md-12">
             <div class="product-image-wrapper">

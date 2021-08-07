@@ -205,7 +205,8 @@ class HomeController extends Controller
     {
         $data = $this->product->find($id);
         $categoryParent = $this->category->where('parent_id', 0)->get();
-        return view('frontend.product.product-detail', compact('data', 'categoryParent'));
+        $productRecommend = $this->product->latest('views_count', 'DESC')->take(12)->get();
+        return view('frontend.product.product-detail', compact('data', 'categoryParent', 'productRecommend'));
     }
     public function test()
     {

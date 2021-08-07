@@ -13,6 +13,7 @@
             @include('frontend.components.sidebar')
             @yield('listproduct')
         </div>
+
     </div>
 </section>
 
