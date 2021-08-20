@@ -240,4 +240,104 @@ class HomeController extends Controller
             \Log::error("Message: " . $e->getMessage() . " on Line: " . $e->getLine());
         }
     }
+    private function jsonDataResult($data, $statusCode)
+    {
+        $result = [
+            'data' => $data,
+            'statusCode' => $statusCode,
+        ];
+        return response()->json($result, $result['statusCode']);
+    }
+    private function jsonMsgResult($errors, $success, $statusCode)
+    {
+        $result = [
+            'errors' => $errors,
+            'success' => $success,
+            'statusCode' => $statusCode,
+        ];
+
+        return response()->json($result, $result['statusCode']);
+    }
+    public function addCart()
+    {
+        $dataId = request()->dataId;
+        $product = $this->product->find($dataId);
+        if (empty($product)) {
+            abort(404);
+        }
+        $cart = session()->get('cart');
+        if (empty($cart)) {
+            $cart[$dataId] = [
+                'id' => $product->id,
+                'name' => $product->name,
+                'price' => $product->price,
+                'quantity' => isset(request()->quantity) ? request()->quantity : 1,
+                'feature_image_path' => $product->feature_image_path,
+                'feature_image_name' => $product->feature_image_name,
+                'content' => $product->content,
+                'slug' => $product->slug,
+            ];
+            session()->put('cart', $cart);
+            return $this->jsonDataResult(['message' => 'success', 'data' => $cart], 200);
+        }
+        if (isset($cart[$dataId])) {
+            $cart[$dataId]['quantity'] += 1;
+            session()->put('cart', $cart);
+            return $this->jsonDataResult(['message' => 'success', 'data' => $cart], 200);
+        }
+        $cart[$dataId] = [
+            'id' => $product->id,
+            'name' => $product->name,
+            'price' => $product->price,
+            'quantity' => isset(request()->quantity) ? request()->quantity : 1,
+            'feature_image_path' => $product->feature_image_path,
+            'feature_image_name' => $product->feature_image_name,
+            'content' => $product->content,
+            'slug' => $product->slug,
+        ];
+        session()->put('cart', $cart);
+        return $this->jsonDataResult(['message' => 'success', 'data' => $cart], 200);
+    }
+
+    public function showProductCart()
+    {
+        $cart = session()->get('cart');
+        $total = 0;
+        foreach ($cart as $item) {
+            $total += $item['quantity'] * $item['price'];
+        }
+        return view('frontend.product.cart.index', compact('cart'));
+    }
+
+    public function deleteCartItem()
+    {
+        if (request()->id) {
+            $cart = session()->get('cart');
+            unset($cart[request()->id]);
+            session()->put('cart', $cart);
+            $cart = session()->get('cart');
+            $cartComponent = view('frontend.product.cart.cart-component', compact('cart'))->render();
+            return $this->jsonDataResult(['message' => 'success', 'data' => $cartComponent, 'dataCart' => $cart], 200);
+        }
+    }
+
+    public function updateCartQuantity()
+    {
+        if (request()->id && request()->quantity) {
+            if (request()->quantity == 0 || request()->quantity < 1) {
+                return response()->json(['quantity' => request()->quantity]);
+            } else {
+                $cart = session()->get('cart');
+                $cart[request()->id]['quantity'] = request()->quantity;
+                session()->put('cart', $cart);
+                $cart = session()->get('cart');
+                $cartComponent = view('frontend.product.cart.cart-component', compact('cart'))->render();
+                $total = 0;
+                foreach ($cart as $item) {
+                    $total += $item['quantity'];
+                }
+                return $this->jsonDataResult(['message' => 'success', 'quantity' => request()->quantity, 'data' => $cartComponent, 'total' => $total], 200);
+            }
+        }
+    }
 }

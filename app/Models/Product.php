@@ -40,7 +40,9 @@ class Product extends Model
     {
         if (request()->search) {
             $search = request()->search;
-            $query->where('name', 'LIKE', "%" . $search . "%");
+            // $query->where('name', 'LIKE', "%" . $search . "%");
+            $query->orWhere('name', 'LIKE', "%" . $search . "%")
+                ->orWhere('price', 'LIKE', "%" . $search . "%");
         }
         return $query;
     }

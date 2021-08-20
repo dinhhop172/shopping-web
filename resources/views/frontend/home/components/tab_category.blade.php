@@ -28,7 +28,7 @@
                             </a>
                             <h2>{{ number_format($productCate->price,0,',','.') }} VND</h2>
                             <p>{{ $productCate->name }}</p>
-                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                            <a href="javascript:;" data-addcart="{{ $productCate->id }}" data-url="{{ route('cart.add', ['id'=>$productCate->id]) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                         </div>
                     </div>
                 </div>
@@ -55,9 +55,7 @@
             </div>
             @endforeach
         </div>
-
         @endif
         @endforeach
-
     </div>
 </div>

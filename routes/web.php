@@ -29,11 +29,20 @@ Route::name("front.")->group(function () {
     Route::get('logout-{item}', 'AdminController@logout')->name('logout');
     Route::get('logout', 'Frontend\HomeController@logout')->name('logout-cus');
 
-    Route::get('/search.html', 'Frontend\HomeController@search')->name('search');
+
+    Route::get('/search', 'Frontend\HomeController@search')->name('search');
     Route::get('/{slug}/{id}.html', 'Frontend\HomeController@productDetail')->name('productdetail');
 });
 Route::get('/test', 'Frontend\HomeController@test');
 Route::get('/view/{id}', 'Frontend\HomeController@viewCount');
+
+Route::name('cart.')->group(function () {
+    Route::post('add-to-cart', 'Frontend\HomeController@addCart')->name('add');
+    Route::get('cart-show', 'Frontend\HomeController@showProductCart')->name('show');
+    Route::get('delete-cart', 'Frontend\HomeController@deleteCartItem')->name('delete');
+    Route::get('update-cart', 'Frontend\HomeController@updateCartQuantity')->name('update');
+    Route::get('update-cart-up', 'Frontend\HomeController@updateCartUpQuantity')->name('updateup');
+});
 
 Route::name("customer.")->middleware('check.login.customer')->prefix('user/account')->group(function () {
     Route::get('/profile.html', 'Frontend\HomeController@profile')->name('profile');

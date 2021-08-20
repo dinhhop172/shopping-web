@@ -30,5 +30,17 @@ class AppServiceProvider extends ServiceProvider
             $categoryLimit = Category::where('parent_id', 0)->take(3)->get();
             $view->with('categoryLimit', $categoryLimit);
         });
+
+        view()->composer('frontend.components.header', function ($view) {
+            if (session()->has('cart')) {
+                $cart = session()->get('cart');
+                // $quantity = count($cart);
+                $quantity = 0;
+                foreach ($cart as $value) {
+                    $quantity += $value['quantity'];
+                }
+                $view->with('quantityAllProduct', $quantity);
+            }
+        });
     }
 }

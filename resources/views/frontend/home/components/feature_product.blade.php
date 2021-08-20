@@ -10,13 +10,13 @@
                     <img src="{{ ($productItem->feature_image_path) }}" alt="" />
                     <h2>{{ number_format($productItem->price) }} VND</h2>
                     <p>{{ $productItem->name }}</p>
-                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                    <a href="javascript:;" data-addcart="{{ $productItem->id }}" data-url="{{ route('cart.add', ['id'=>$productItem->id]) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                 </div>
                 <div class="product-overlay">
                     <div class="overlay-content">
                         <h2>{{ number_format($productItem->price,0,',','.') }} VND</h2>
                         <p>{{ $productItem->name }}</p>
-                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                        <a href="javascript:;" data-addcart="{{ $productItem->id }}" data-url="{{ route('cart.add', ['id'=>$productItem->id]) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                     </div>
                 </div>
             </div>

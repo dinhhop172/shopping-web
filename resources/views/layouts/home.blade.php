@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <title>@yield('title')</title>
     <link href="{{ asset('eshopper/css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('vendor/owlcarousel/owl.carousel.min.css') }}">
@@ -13,6 +14,7 @@
     <link href="{{ asset('eshopper/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('eshopper/css/prettyPhoto.css') }}" rel="stylesheet">
     <link href="{{ asset('eshopper/css/price-range.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css" integrity="sha512-wJgJNTBBkLit7ymC6vvzM1EcSWeM9mmOu+1USHaRBbHkm6W9EgM0HY27+UtUaprntaYQJF75rc8gjxllKs5OIQ==" crossorigin="anonymous" />
     <link href="{{ asset('eshopper/css/animate.css') }}" rel="stylesheet">
     <link href="{{ asset('eshopper/css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('eshopper/css/responsive.css') }}" rel="stylesheet">
@@ -41,10 +43,19 @@
     <script src="{{ asset('eshopper/js/price-range.js') }}"></script>
     <script src="{{ asset('eshopper/js/jquery.prettyPhoto.js') }}"></script>
     <script src="{{ asset('eshopper/js/main.js') }}"></script>
-    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js" integrity="sha512-zlWWyZq71UMApAjih4WkaRpikgY9Bz1oXIW5G0fED4vk14JjGlQ1UmkGM392jEULP8jbNMiwLWdM8Z87Hu88Fw==" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="{{asset('frontend/app.js')}}"></script>
     @include('sweetalert::alert')
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
     @yield('js')
+    @stack('scripts')
 </body>
 
 </html>

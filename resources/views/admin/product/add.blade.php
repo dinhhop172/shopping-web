@@ -89,6 +89,6 @@
 
 @section("js")
 <script src="{{ asset('vendor/select2/select2.min.js') }}"></script>
-<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js"></script>
+<script src="https://cdn.tiny.cloud/1/x3r4d3l3gyxtyq37ohwss7rzg4c4fvvm291gccrfxsm1tr6u/tinymce/5/tinymce.min.js"></script>
 <script src="{{ asset('admins/product/add/add.js') }}"></script>
 @endsection

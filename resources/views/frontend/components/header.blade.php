@@ -34,7 +34,7 @@
             <div class="row">
                 <div class="col-md-4 clearfix">
                     <div class="logo pull-left">
-                        <a href="index.html"><img src="{{ asset('eshopper/images/home/logo.png') }}" alt="" /></a>
+                        <a href="{{ route('front.index') }}"><img src="{{ asset('eshopper/images/home/logo.png') }}" alt="" /></a>
                     </div>
                     <div class="btn-group pull-right clearfix">
                         <div class="btn-group">
@@ -75,7 +75,15 @@
                             @endif
                             <li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
                             <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                            <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                            <li><a href="{{ route('cart.show') }}"><i class="fa fa-shopping-cart"></i> Cart
+                                    @if (session()->has('cart'))
+                                    <span class="badge count-cart">{{ $quantityAllProduct }}</span>
+                                    @else
+                                    {{-- <li><a href="javascript:;"><i class="fa fa-shopping-cart"></i> Cart --}}
+                                    <span class="badge count-cart"></span>
+                                    {{-- </a></li> --}}
+                                    @endif
+                            </a></li>
                             {{-- @if (!auth()->guard('customer')->check()) --}}
                             @guest('customer')
                             <li><a href="{{route('front.login')}}"><i class="fa fa-lock"></i> Login</a></li>

@@ -3,8 +3,8 @@ $(function() {
         $('li a').removeClass('active');
         $(this).addClass('active');
     });
-    $('.owl-prev')[0].classList.add('recommended-item-control');
-    $('.owl-next')[0].classList.add('recommended-item-control');
+    // $('.owl-prev')[0].classList.add('recommended-item-control');
+    // $('.owl-next')[0].classList.add('recommended-item-control');
     // $('.owl-prev')[1].classList.add('recommended-item-control');
     // $('.owl-next')[1].classList.add('recommended-item-control');
     // $('.active_product')[0].classList.add('active', 'in');
