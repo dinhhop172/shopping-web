@@ -17,7 +17,7 @@ class LoginCustomerMiddleware
     public function handle($request, Closure $next, $guard = 'customer')
     {
         if (Auth::guard($guard)->check()) {
-            return redirect()->route('front');
+            return redirect()->route('front.index');
         } else {
             return $next($request);
         }

@@ -194,7 +194,7 @@ Route::get('test/{n}', function($n){
         }
         return 1;
     }
-    for ($i=2; $i <= $n; $i++) { 
+    for ($i=2; $i <= $n; $i++) {
         while(checkPreim($i) && $n % $i == 0){
             $n = $n / $i;
             $array[] .= $i;
@@ -212,7 +212,7 @@ Route::get('test/{n}', function($n){
     //     $arrNumbers = array ();
     //     $arrNumbers [0] = "";
     //     $count = 0;
-     
+
     //     // phân tích số nguyên n thành tích các số nguyên tố
     //     while ( $n > 1 ) {
     //         if ($n % $i == 0) {

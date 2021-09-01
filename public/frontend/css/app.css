@@ -251,16 +251,16 @@
 
   .p-auto {
     padding: auto;
-  }
+}
 
-  .float-right {
+.float-right {
     float: right;
-  }
+}
 
-  .float-left {
+.float-left {
     float: left;
-  }
+}
 
-  .justify-content-center {
+.justify-content-center {
     justify-content: center;
-  }
+}

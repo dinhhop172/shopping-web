@@ -346,5 +346,13 @@ class HomeController extends Controller
             }
         }
     }
-
+    public function showCheckout()
+    {
+        $cart = session()->get('cart');
+        $total = 0;
+        foreach ($cart as $item) {
+            $total += $item['quantity'] * $item['price'];
+        }
+        return view('frontend.checkout.index', compact('cart', 'total'));
+    }
 }
