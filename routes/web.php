@@ -24,7 +24,7 @@ Route::name("front.")->group(function () {
     Route::get('/category/{slug}-{id}.html', 'Frontend\CatgoryController@index')->name('category');
     Route::get('/contact.html', 'Frontend\CatgoryController@contact')->name('contact');
     Route::get('/sign-in.html', 'Frontend\HomeController@login')->name('login')->middleware('customerCheck');
-    Route::post('/sign-in', 'Frontend\HomeController@postLogin')->name('post.login');
+    Route::post('/sign-in.html', 'Frontend\HomeController@postLogin')->name('post.login');
 
     Route::get('logout-{item}', 'AdminController@logout')->name('logout');
     Route::get('logout', 'Frontend\HomeController@logout')->name('logout-cus');
@@ -43,6 +43,14 @@ Route::name('cart.')->group(function () {
     Route::get('update-cart', 'Frontend\HomeController@updateCartQuantity')->name('update');
     Route::get('update-cart-up', 'Frontend\HomeController@updateCartUpQuantity')->name('updateup');
 });
+Route::name('checkout.')->group(function () {
+    Route::get('show-checkout', 'Frontend\HomeController@showCheckout')->name('show')->middleware('checkout', 'verifi.customer');
+});
+
+// verify email customer
+Route::get('user/email/verify', 'VerificationController@show')->name('verify.notice');
+Route::get('user/email/verify/{id}/{hash}', 'VerificationController@verify')->name('verify.verify');
+Route::post('user/email/resend', 'VerificationController@resend')->name('verify.resend');
 
 Route::name("customer.")->middleware('check.login.customer')->prefix('user/account')->group(function () {
     Route::get('/profile.html', 'Frontend\HomeController@profile')->name('profile');

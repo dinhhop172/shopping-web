@@ -26,7 +26,7 @@
                             <a href="{{ route('front.productdetail', ['slug'=>$productCate->slug, 'id' => $productCate->id]) }}">
                                 <img src="{{ $productCate->feature_image_path }}" alt="" />
                             </a>
-                            <h2>{{ number_format($productCate->price,0,',','.') }} VND</h2>
+                            <h2>${{ number_format($productCate->price,2) }}</h2>
                             <p>{{ $productCate->name }}</p>
                             <a href="javascript:;" data-addcart="{{ $productCate->id }}" data-url="{{ route('cart.add', ['id'=>$productCate->id]) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                         </div>
@@ -46,7 +46,7 @@
                             <a href="{{ route('front.productdetail', ['slug'=>$productCate->slug, 'id' => $productCate->id]) }}">
                                 <img src="{{ $productCate->feature_image_path }}" alt="" />
                             </a>
-                            <h2>{{ number_format($productCate->price,0,',','.') }} VND</h2>
+                            <h2>${{ number_format($productCate->price,2) }}$</h2>
                             <p>{{ $productCate->name }}</p>
                             <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                         </div>

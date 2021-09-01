@@ -65,12 +65,12 @@ class HomeController extends Controller
         $login = Auth::guard('customer')->attempt($attempt, $remember);
         if (is_null($request->email) || is_null($request->password)) {
             Alert::warning('<h5>Vui lòng nhập đủ thông tin</h5>')->toHtml();
-            return redirect('/sign-in');
+            return redirect('/sign-in.html');
         } elseif ($login) {
             return redirect('/');
         } else {
             Alert::error('<h5>Tài khoản hoặc mật khẩu không chính xác</h5>')->toHtml();
-            return redirect('/sign-in');
+            return redirect('/sign-in.html');
         }
     }
     public function logout()
@@ -302,11 +302,11 @@ class HomeController extends Controller
     public function showProductCart()
     {
         $cart = session()->get('cart');
-        $total = 0;
-        foreach ($cart as $item) {
-            $total += $item['quantity'] * $item['price'];
-        }
-        return view('frontend.product.cart.index', compact('cart'));
+        // $total = 0;
+        // foreach ($cart as $item) {
+        //     $total += $item['quantity'] * $item['price'];
+        // }
+        return view('frontend.cart.index', compact('cart'));
     }
 
     public function deleteCartItem()
@@ -316,7 +316,7 @@ class HomeController extends Controller
             unset($cart[request()->id]);
             session()->put('cart', $cart);
             $cart = session()->get('cart');
-            $cartComponent = view('frontend.product.cart.cart-component', compact('cart'))->render();
+            $cartComponent = view('frontend.cart.cart-component', compact('cart'))->render();
             return $this->jsonDataResult(['message' => 'success', 'data' => $cartComponent, 'dataCart' => $cart], 200);
         }
     }
@@ -331,7 +331,7 @@ class HomeController extends Controller
                 $cart[request()->id]['quantity'] = request()->quantity;
                 session()->put('cart', $cart);
                 $cart = session()->get('cart');
-                $cartComponent = view('frontend.product.cart.cart-component', compact('cart'))->render();
+                $cartComponent = view('frontend.cart.cart-component', compact('cart'))->render();
                 $total = 0;
                 foreach ($cart as $item) {
                     $total += $item['quantity'];
@@ -339,5 +339,14 @@ class HomeController extends Controller
                 return $this->jsonDataResult(['message' => 'success', 'quantity' => request()->quantity, 'data' => $cartComponent, 'total' => $total], 200);
             }
         }
+    }
+    public function showCheckout()
+    {
+        $cart = session()->get('cart');
+        $total = 0;
+        foreach ($cart as $item) {
+            $total += $item['quantity'] * $item['price'];
+        }
+        return view('frontend.checkout.index', compact('cart', 'total'));
     }
 }

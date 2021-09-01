@@ -2,7 +2,7 @@
 @section('title', 'Cart Page')
 @section('content')
 <section id="cart_items">
-    @include('frontend.product.cart.cart-component')
+    @include('frontend.cart.cart-component')
 </section>
 <!--/#cart_items-->
 @endsection

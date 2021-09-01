@@ -13,7 +13,7 @@
                         <div class="single-products">
                             <div class="productinfo text-center">
                                 <img src="{{ $valueRecommend->feature_image_path }}" alt="" />
-                                <h2>{{ number_format($valueRecommend->price,0,',','.') }}</h2>
+                                <h2>{{ number_format($valueRecommend->price,2) }}</h2>
                                 <p>{{ $valueRecommend->name }}</p>
                                 <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                             </div>

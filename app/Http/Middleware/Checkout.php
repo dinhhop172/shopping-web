@@ -3,9 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Support\Facades\Auth;
 
-class LoginCustomerMiddleware
+class Checkout
 {
     /**
      * Handle an incoming request.
@@ -16,10 +15,11 @@ class LoginCustomerMiddleware
      */
     public function handle($request, Closure $next, $guard = 'customer')
     {
-        if (Auth::guard($guard)->check()) {
-            return redirect()->route('front.index');
-        } else {
+        if (auth()->guard($guard)->check() && count(session()->get('cart')) > 0) {
             return $next($request);
+        } else {
+            alert()->warning('Vui lòng đăng nhập và số lượng cart phải lớn hơn 0 để tiếp tục');
+            return redirect(route('cart.show'));
         }
     }
 }
