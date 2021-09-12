@@ -10,7 +10,7 @@
                         <a href="{{ route('front.productdetail', ['slug'=>$valueRecommend->slug, 'id' => $valueRecommend->id]) }}">
                             <img src="{{ $valueRecommend->feature_image_path }}" alt="" />
                         </a>
-                        <h2>{{ number_format($valueRecommend->price,0,',','.') }} VND</h2>
+                        <h2>${{ number_format($valueRecommend->price,2) }}</h2>
                         <p>{{ $valueRecommend->name }}</p>
                         <a href="javascript:;" data-addcart="{{ $valueRecommend->id }}" data-url="{{ route('cart.add', ['id'=>$valueRecommend->id]) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                     </div>

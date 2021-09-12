@@ -29,7 +29,7 @@
                     <p>Web ID: {{ $data->id }}</p>
                     <img src="{{ asset('eshopper/images/product-details/rating.png') }}" alt="" />
                     <span>
-                        <span>{{ number_format($data->price,0,',','.') }} VND</span>
+                        <span>${{ number_format($data->price,2) }}</span>
                         <label>Quantity:</label>
                         <input type="text" value="3" />
                         <a href="#" class="btn btn-fefault cart">
@@ -56,5 +56,8 @@
 <script>
     $('.owl-prev')[1].classList.add('recommended-item-control');
     $('.owl-next')[1].classList.add('recommended-item-control');
+
+    $('.owl-prev')[0].classList.add('recommended-item-control');
+    $('.owl-next')[0].classList.add('recommended-item-control');
 </script>
 @endsection

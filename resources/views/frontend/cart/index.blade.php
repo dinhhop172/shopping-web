@@ -2,7 +2,7 @@
 @section('title', 'Cart Page')
 @section('content')
 <section id="cart_items">
-    @include('frontend.product.cart.cart-component')
+    @include('frontend.cart.cart-component')
 </section>
 <!--/#cart_items-->
 @endsection
@@ -35,7 +35,6 @@
             }
         });
     }
-
     function updateCartItem() {
         $quantity = $(this).val();
         $idItem = $(this).data('id');
@@ -67,7 +66,6 @@
             }
         });
     }
-
     function cartQuantityUp(event) {
         event.preventDefault();
         var quantity = parseInt($(this).parents('tr').find('input.cart_quantity_input').val());
@@ -75,7 +73,6 @@
         $(this).parents('tr').find('input[name=quantity]').val(quantity);
         var id = $(this).parents('tr').find('input[name=quantity]').data('id');
         console.log(quantity);
-
         $.ajax({
             url: $('.cart_update').data('update'),
             type: "GET",
@@ -97,8 +94,6 @@
             }
         });
     }
-
-
     function cartQuantityDown(event) {
         event.preventDefault();
         var quantity = parseInt($(this).parents('tr').find('input.cart_quantity_input').val());
@@ -133,14 +128,12 @@
             }
         });
     }
-
     $(function() {
         $(document).on('click', '.cart_quantity_delete', deleteCartItem);
         $(document).on('click', '.cart_quantity_up', cartQuantityUp);
         $(document).on('click', '.cart_quantity_down', cartQuantityDown);
         $(document).on('change', '.cart_quantity_input', updateCartItem);
     });
-
     function toastr(title, mess, icon) {
         $.toast({
             heading: title,
