@@ -36,6 +36,7 @@ Route::name("front.")->group(function () {
 Route::get('/test', 'Frontend\HomeController@test');
 Route::get('/view/{id}', 'Frontend\HomeController@viewCount');
 
+//cart
 Route::name('cart.')->group(function () {
     Route::post('add-to-cart', 'Frontend\HomeController@addCart')->name('add');
     Route::get('cart-show', 'Frontend\HomeController@showProductCart')->name('show');
@@ -43,8 +44,10 @@ Route::name('cart.')->group(function () {
     Route::get('update-cart', 'Frontend\HomeController@updateCartQuantity')->name('update');
     Route::get('update-cart-up', 'Frontend\HomeController@updateCartUpQuantity')->name('updateup');
 });
+//checkout
 Route::name('checkout.')->group(function () {
-    Route::get('show-checkout', 'Frontend\HomeController@showCheckout')->name('show')->middleware('checkout', 'verifi.customer');
+    Route::get('show-checkout', 'Frontend\CheckoutController@showCheckout')->name('show')->middleware('checkout', 'verifi.customer');
+    Route::post('place-order', 'Frontend\CheckoutController@placeOrder')->name('place')->middleware('checkout', 'verifi.customer');
 });
 
 // verify email customer

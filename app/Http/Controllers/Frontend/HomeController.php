@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use App\Models\Category;
 use App\Models\Customer;
+use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\Product;
 use App\Models\Setting;
 use App\Models\Slider;
@@ -114,7 +116,11 @@ class HomeController extends Controller
 
     public function myOrder()
     {
-        return view('frontend.profile.my_order');
+        $data['id'] = auth()->guard('customer')->id();
+        $data['orders'] = Order::where('customer_id', $data['id']);
+        $data['waiting_check'] = Order::where('customer_id', $data['id'])->where('status', "Checking order")->get();
+        $data['order_details'] = OrderDetail::paginate(10);
+        return view('frontend.profile.my_order', compact('data'));
     }
     public function verifyPassword(Request $request)
     {
@@ -340,13 +346,5 @@ class HomeController extends Controller
             }
         }
     }
-    public function showCheckout()
-    {
-        $cart = session()->get('cart');
-        $total = 0;
-        foreach ($cart as $item) {
-            $total += $item['quantity'] * $item['price'];
-        }
-        return view('frontend.checkout.index', compact('cart', 'total'));
-    }
+
 }

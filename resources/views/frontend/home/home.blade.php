@@ -3,7 +3,9 @@
 @section('content')
 
 @include('frontend.home.components.slider')
-
+@if (Session::has('place'))
+    {{ alert()->success(session()->get('place')) }}
+@endif
 <section>
     <div class="container">
         <div class="row">
@@ -80,3 +82,7 @@
     }
 </script>
 @endsection
+
+@if (Session::has('place'))
+    {{ Session::forget('place') }}
+@endif

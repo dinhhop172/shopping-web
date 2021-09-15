@@ -1,6 +1,9 @@
 @extends('layouts.home')
 @section('title', 'Cart Page')
 @section('content')
+@if (Session::has('err-checkout'))
+    {{ alert()->warning(session()->get('err-checkout')) }}
+@endif
 <section id="cart_items">
     <div class="container">
         <div class="breadcrumbs">
@@ -12,74 +15,29 @@
 
         <div class="shopper-informations">
             <div class="row">
-                <div class="col-sm-3">
-                    <div class="shopper-info">
-                        <p>Shopper Information</p>
-                        <form>
-                            <input type="text" placeholder="Display Name">
-                            <input type="text" placeholder="User Name">
-                            <input type="password" placeholder="Password">
-                            <input type="password" placeholder="Confirm password">
-                        </form>
-                        <a class="btn btn-primary" href="">Get Quotes</a>
-                        <a class="btn btn-primary" href="">Continue</a>
-                    </div>
-                </div>
-                <div class="col-sm-5 clearfix">
-                    <div class="bill-to">
-                        <p>Bill To</p>
-                        <div class="form-one">
-                            <form>
-                                <input type="text" placeholder="Company Name">
-                                <input type="text" placeholder="Email*">
-                                <input type="text" placeholder="Title">
-                                <input type="text" placeholder="First Name *">
-                                <input type="text" placeholder="Middle Name">
-                                <input type="text" placeholder="Last Name *">
-                                <input type="text" placeholder="Address 1 *">
-                                <input type="text" placeholder="Address 2">
-                            </form>
-                        </div>
-                        <div class="form-two">
-                            <form>
-                                <input type="text" placeholder="Zip / Postal Code *">
-                                <select>
-                                    <option>-- Country --</option>
-                                    <option>United States</option>
-                                    <option>Bangladesh</option>
-                                    <option>UK</option>
-                                    <option>India</option>
-                                    <option>Pakistan</option>
-                                    <option>Ucrane</option>
-                                    <option>Canada</option>
-                                    <option>Dubai</option>
-                                </select>
-                                <select>
-                                    <option>-- State / Province / Region --</option>
-                                    <option>United States</option>
-                                    <option>Bangladesh</option>
-                                    <option>UK</option>
-                                    <option>India</option>
-                                    <option>Pakistan</option>
-                                    <option>Ucrane</option>
-                                    <option>Canada</option>
-                                    <option>Dubai</option>
-                                </select>
-                                <input type="password" placeholder="Confirm password">
-                                <input type="text" placeholder="Phone *">
-                                <input type="text" placeholder="Mobile Phone">
-                                <input type="text" placeholder="Fax">
-                            </form>
+                <form method="POST" data-route="{{ route('checkout.place') }}" id="place_order">
+                    @csrf
+                    <div class="col-sm-3">
+                        <div class="shopper-info">
+                            <p>Shopper Information</p>
+
+                            <address>Name: {{ $cus->name }}</address>
+                            <address>Phone number: {{ $cus->phone }} <a href="user/account/profile.html">Change</a></address>
+                            <small style="border-bottom: 1px solid #404352;font-size: 14px;">Please enter specific address:</small>
+                            <select name="delivery_address">
+                                <option value="{{ $cus->address }}">{{ $cus->address }}</option>
+                            </select>
+                            <a href="user/account/profile.html">Change</a>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="order-message">
-                        <p>Shipping Order</p>
-                        <textarea name="message" placeholder="Notes about your order, Special Notes for Delivery" rows="16"></textarea>
-                        <label><input type="checkbox"> Shipping to bill address</label>
+                    <div class="col-sm-4">
+                        <div class="order-message">
+                            <p>Shipping Order</p>
+                            <textarea name="note" rows="10" placeholder="Notes about your order, Special Notes for Delivery" rows="16"></textarea>
+                            <button class="btn btn-primary" type="submit" href="">Place order</button>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
         <div class="review-payment">
@@ -138,11 +96,11 @@
                             <table class="table table-condensed total-result">
                                 <tr>
                                     <td>Cart Sub Total</td>
-                                    <td>${{ $total }}</td>
+                                    <td>${{ number_format($total,2) }}</td>
                                 </tr>
                                 <tr>
                                     <td>Exo Tax</td>
-                                    <td>$2</td>
+                                    <td>${{ number_format(2,2) }}</td>
                                 </tr>
                                 <tr class="shipping-cost">
                                     <td>Shipping Cost</td>
@@ -150,7 +108,7 @@
                                 </tr>
                                 <tr>
                                     <td>Total</td>
-                                    <td><span>${{ $total + 2}}</span></td>
+                                    <td><span>${{ number_format($total+2,2) }}</span></td>
                                 </tr>
                             </table>
                             <a href="{{ route('cart.show') }}" class="btn btn-primary">Back to cart</a>
@@ -165,3 +123,40 @@
 <!--/#cart_items-->
 
 @endsection
+@php
+if(session()->has('success-verify')){
+    alert()->success('<h4>Verified success</h4>')->toHtml();
+}
+@endphp
+
+@push('scripts')
+<script>
+    $(function(){
+        $('#place_order').submit(function(event){
+            event.preventDefault();
+            var route = $('#place_order').data('route');
+            var form_data = $(this).serialize();
+            $.ajax({
+                url: route,
+                method: 'POST',
+                data: form_data,
+                beforeSend: function(){
+                    swal({
+                        icon: "success",
+                        title: 'Please wating...',
+                        closeOnClickOutside:false,
+                        buttons: false
+                    });
+                },
+                success: function(suc){
+                    {{ session()->put('place', 'Placed  order successfully, Please check your email for more details') }}
+                    window.location.href = "/";
+                },
+                error: function(err){
+                    console.log(err);
+                }
+            })
+        })
+    });
+</script>
+@endpush
