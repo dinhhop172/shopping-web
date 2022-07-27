@@ -151,8 +151,8 @@ class AdminProductController extends Controller
                     $tagInstance = $this->tag->firstOrCreate(['name' => $tagItem]);
                     $tagIds[] = $tagInstance->id;
                 }
-                $product->tags()->sync($tagIds);
             }
+            $product->tags()->sync($tagIds);
             DB::commit();
             return redirect()->route('products.index');
         } catch (Exception $e) {

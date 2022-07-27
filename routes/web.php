@@ -1,9 +1,10 @@
 <?php
-if (version_compare(PHP_VERSION, '7.2.0', '>=')) {
-    error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
-}
+// if (version_compare(PHP_VERSION, '7.2.0', '>=')) {
+//     error_reporting(E_ALL ^ E_NOTICE ^ E_WARNING);
+// }
 
 use App\Http\Controllers\AdminController;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -161,3 +162,77 @@ Route::post('/upload/', 'AdminRoleController@uploadFile')->name('upload.post');
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
+Route::get('testnha', function(){
+    // $a = 1;
+    // $a++;
+    // $a += 2;
+    // $a++;
+    // --$a;
+    // $a -= 2;
+    // $a--;
+    // echo $a;
+
+    // $a = 1;
+    // $a--;
+    // $a+=5;
+    // echo $a++;
+    $a = 1;
+    $b = &$a;
+    $b++;
+    echo $b + $a;
+});
+// function xinchao($a){
+// return $a - 1;
+// }
+Route::get('test/{n}', function($n){
+    // kiem tra so nguyen to
+    $array = [];
+    function checkPreim($a){
+        for ($i=2; $i <= sqrt($a); $i++) {
+            if($a % $i == 0)
+                return 0;
+        }
+        return 1;
+    }
+    for ($i=2; $i <= $n; $i++) { 
+        while(checkPreim($i) && $n % $i == 0){
+            $n = $n / $i;
+            $array[] .= $i;
+        }
+    }
+    return $array;
+    // echo "<pre>";
+    // print_r($array);
+    // echo checkPreim(7);
+    // echo "<pre>";
+    // print_r($m);
+
+    // function phanTichSoNguyen($n) {
+    //     $i = 2;
+    //     $arrNumbers = array ();
+    //     $arrNumbers [0] = "";
+    //     $count = 0;
+     
+    //     // phân tích số nguyên n thành tích các số nguyên tố
+    //     while ( $n > 1 ) {
+    //         if ($n % $i == 0) {
+    //             $n = floor ( $n / $i );
+    //             $arrNumbers [$count] = $i;
+    //             $count = $count + 1;
+    //         } else {
+    //             $i ++;
+    //         }
+    //     }
+    //     // nếu listNumbers trống thì add n vào listNumbers
+    //     if ($arrNumbers [0] == "") {
+    //         $arrNumbers [0] = $n;
+    //     }
+    //     return $arrNumbers;
+    // }
+    // echo "<pre>";
+    // print_r(phanTichSoNguyen(100));
+});
+Route::get('dd', function(){
+    // echo $dk;
+    phpinfo();
+});
