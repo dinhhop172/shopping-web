@@ -17,9 +17,9 @@ class MailCheckout extends Mailable
      *
      * @return void
      */
-    public function __construct($details)
+    public function __construct($detailss)
     {
-        $this->details = $details;
+        $this->details = $detailss;
     }
 
     /**

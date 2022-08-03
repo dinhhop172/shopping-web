@@ -74,7 +74,7 @@
                             <li><a href="{{ route('front.login') }}"><i class="fa fa-user"></i> Account</a></li>
                             @endif
                             <li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
-                            @if (auth()->guard('customer')->check() && $quantityAllProduct > 0)
+                            @if (auth()->guard('customer')->check())
                             <li><a href="{{ route('checkout.show') }}"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                             @endif
                             <li><a href="{{ route('cart.show') }}"><i class="fa fa-shopping-cart"></i> Cart

@@ -48,7 +48,7 @@
                         <div class="form-group">
                             <label>Chọn vai trò</label>
                             <select name="role_id[]" class="form-control select2_init" multiple>
-                                <option value=""></option>
+                            <option value=""></option>
                                 @foreach ($roles as $role)
                                 <option
                                 {{ ($roleOfUser->contains('id', $role->id)) ? 'selected' : '' }}

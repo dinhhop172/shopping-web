@@ -30,7 +30,7 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $item['name'] }}</td>
-                                <td><img src="{{ $item['image'] }}" alt="" width="100px"></td>
+                                <td><img src="{{ $item['feature_image_path'] }}" alt="" width="100px"></td>
                                 <td>{{ $item['price'] }}</td>
                                 <td>{{ $item['quantity'] }}</td>
                                 <td>{{ $item['price'] * $item['quantity'] }}</td>

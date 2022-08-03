@@ -61,11 +61,15 @@ class CheckoutController extends Controller
                     'product' => $cart,
                     'totalPrice' => $total,
                 ];
-                Mail::to($details['email'])->send(new MailCheckout($details));
-                session()->forget('cart');
+                // dd($details);
                 DB::commit();
+                session()->forget('cart');
+                if(Mail::to($details['email'])->send(new MailCheckout($details))){
+                    session()->put('place', 'Đặt hàng thành công, Vui lòng kiểm tra Mail của bạn');
+                    return 'success';
+                }
+
                 // return redirect('/')->with('place', 'Placed  order successfully');
-                return response()->json('success');
             }
         } catch (Exception $e) {
             DB::rollBack();

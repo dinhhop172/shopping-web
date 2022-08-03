@@ -27,27 +27,27 @@
                 @endphp
                 <tr>
                     <td class="cart_product">
-                        <a href="{{ route('front.productdetail', ['slug'=>Str::slug($item[name]), 'id'=>$item[id]]) }}"><img src="{{ asset($item[feature_image_path]) }}" alt="" width="110px" height="110px"></a>
+                        <a href="{{ route('front.productdetail', ['slug'=>Str::slug($item['name']), 'id'=>$item['id']]) }}"><img src="{{ asset($item['feature_image_path']) }}" alt="" width="110px" height="110px"></a>
                     </td>
                     <td class="cart_description">
-                        <h4><a href="">{{ $item[name] }}</a></h4>
+                        <h4><a href="">{{ $item['name'] }}</a></h4>
                         <p>Web ID: 1089772</p>
                     </td>
                     <td class="cart_price">
-                        <p>${{ number_format($item[price],2) }}</p>
+                        <p>${{ number_format($item['price'],2) }}</p>
                     </td>
                     <td class="cart_quantity cart_update" data-update="{{ route('cart.update') }}">
                         <div class="cart_quantity_button">
                             <a class="cart_quantity_down" href="javascript:;"> - </a>
-                            <input class="cart_quantity_input" data-id="{{ $item[id] }}" name="quantity" value="{{ $item[quantity] }}" min="1" size="2">
+                            <input class="cart_quantity_input" data-id="{{ $item['id'] }}" name="quantity" value="{{ $item['quantity'] }}" min="1" size="2">
                             <a class="cart_quantity_up" href="javascript:;"> + </a>
                         </div>
                     </td>
                     <td class="cart_total">
-                        <p class="cart_total_price">${{ number_format($item[price] * $item[quantity],2) }}</p>
+                        <p class="cart_total_price">${{ number_format($item['price'] * $item['quantity'],2) }}</p>
                     </td>
                     <td class="cart_delete">
-                        <a data-id="{{ $item[id] }}" class="cart_quantity_delete" href="javascript:;" style="color: black;"><i class="fa fa-times"></i></a>
+                        <a data-id="{{ $item['id'] }}" class="cart_quantity_delete" href="javascript:;" style="color: black;"><i class="fa fa-times"></i></a>
                     </td>
                 </tr>
                 @empty

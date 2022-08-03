@@ -4,9 +4,16 @@
 
 @include('frontend.home.components.slider')
 @if (Session::has('place'))
-    {{ alert()->success(session()->get('place')) }}
+    {{-- {{ alert()->success(session()->get('place')) }} --}}
+    {{-- {!! `<script>alert("session()->get('place')")</script>` !!} --}}
+    @php
+        echo "<script>";
+        echo "alert(`Đặt hàng thành công, Vui lòng kiểm tra Order của bạn trong Mail`);";
+        echo "</script>";
+    @endphp
 @endif
 <section>
+    
     <div class="container">
         <div class="row">
             @include('frontend.components.sidebar')
